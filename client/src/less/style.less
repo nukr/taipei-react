@@ -1,0 +1,32 @@
+@nice-blue: #5B83AD;
+@light-blue: @nice-blue + #111;
+@import './cashier.less';
+@import './footer.less';
+
+html, body, #react, .main {
+  height: 100%;
+}
+
+.main {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.right-side {
+  flex: 5;
+  display: flex;
+  flex-flow: column;
+
+  .meal-button-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    flex: 5;
+  }
+
+  .meal-button {
+    flex: 0 1 90%/6;
+    margin-top: 10px;
+  }
+}
+
