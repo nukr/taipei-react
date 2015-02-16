@@ -1,7 +1,10 @@
-@nice-blue: #5B83AD;
-@light-blue: @nice-blue + #111;
 @import './cashier.less';
 @import './footer.less';
+
+@cashier-bg-color: #273135;
+@cashier-font-color: #89949B;
+@right-side-bg-color: #E9F0F5;
+
 
 html, body, #react, .main {
   height: 100%;
@@ -13,6 +16,7 @@ html, body, #react, .main {
 }
 
 .right-side {
+  background: @right-side-bg-color;
   flex: 5;
   display: flex;
   flex-flow: column;
