@@ -4,7 +4,7 @@ const util = require('../util/');
 
 let AppActionCreators = {
 
-  init(){
+  init () {
     util.getMeals();
     AppDispatcher.handleViewAction({
       actionType: AppConstants.INIT

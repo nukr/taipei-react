@@ -3,7 +3,7 @@ const AppConstants = require('../constants/AppConstants');
 
 let OrderAction = {
 
-  add(meal){
+  add (meal) {
     AppDispatcher.handleViewAction({
       actionType: AppConstants.ADD_ORDER,
       items: meal

@@ -9,27 +9,27 @@ State.orders = {};
 
 Object.assign(Store, EventEmitter.prototype, {
 
-  getState() {
+  getState () {
     return State;
   },
 
-  add(meal) {
+  add (meal) {
     meal.count = meal.count || 0;
     meal.count++;
     State.orders[meal._id] = meal;
   },
 
-  addChangeListener(callback) {
+  addChangeListener (callback) {
     this.on(AppConstants.CHANGE_EVENT, callback);
   },
 
-  removeChangeListener(callback) {
+  removeChangeListener (callback) {
     this.removeListener(AppConstants.CHANGE_EVENT, callback);
   }
 
 });
 
-Store.dispatchToken = AppDispatcher.register(function eventHandlers(evt) {
+Store.dispatchToken = AppDispatcher.register(function eventHandlers (evt) {
 
   var action = evt.action;
 

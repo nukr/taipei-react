@@ -1,42 +1,47 @@
-const React = require('react');
+import React, {Component} from 'react';
 const OrderAction = require('../actions/OrderAction');
-const store = require('../stores/SimpleStore');
-const MealButton = require('./MealButton.jsx');
+import SimpleStore from '../stores/SimpleStore';
+import MealButton from './MealButton.jsx';
 
-function getState() {
-  return store.getState();
-}
-let MealButtons = React.createClass({
-  getInitialState(){
-    return getState();
-  },
+let getState = () => {
+  return {
+    SimpleStore: SimpleStore.getState()
+  };
+};
 
-  renderMealButton() {
+
+class MealButtons extends Component {
+  constructor () {
+    super();
+    this.state = getState();
+    this.handleClick = (meal, event) => {
+      console.log(meal);
+      OrderAction.add(meal);
+    };
+  }
+
+  renderMealButton () {
     let str = [];
     let meals = [];
-    return meals = this.state.meals.map(function (meal, index) {
-      return(
+    return meals = this.state.SimpleStore.meals.map((meal, index) => {
+      return (
         <MealButton
           meal={meal}
-          onClick={this.clickHandler}
+          onClick={this.handleClick}
           key={index}
         />
-      )
-    }.bind(this));
-  },
+      );
+    });
+  }
 
-  clickHandler(meal, event) {
-    OrderAction.add(meal);
-  },
-
-  render() {
-    return(
+  render () {
+    return (
       <div className="meal-button-container">
         { this.renderMealButton() }
       </div>
     );
   }
+}
 
-});
+export default MealButtons;
 
-module.exports = MealButtons;

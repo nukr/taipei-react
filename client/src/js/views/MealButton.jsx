@@ -2,9 +2,9 @@ const React = require('react');
 const action = require('../actions/AppActionCreator');
 
 let MealButton = React.createClass({
-  render(){
+  render () {
     let meal = this.props.meal;
-    return(
+    return (
       <button
         onClick={this.props.onClick.bind(null, meal)}
         className="meal-button"

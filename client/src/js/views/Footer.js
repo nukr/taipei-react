@@ -1,21 +1,19 @@
 const React = require('react');
+const FooterButton = require('./FooterButton');
 
 let Footer = React.createClass({
+  handleClick() {
+    alert('hi');
+  },
+
   render() {
     return(
       <div className="footer">
-        <div className="nav-btn-wrapper">
-          <a href="#">
-            <i className="fa fa-money"></i>
-          </a>
-        </div>
-
-        <div className="nav-btn-wrapper">
-          <a href="#">
-            <i className="fa fa-list-ol"></i>
-          </a>
-        </div>
-
+        <FooterButton icon='money' onClick={this.handleClick} />
+        <FooterButton icon='bed' onClick={this.handleClick} />
+        <FooterButton icon='ship' onClick={this.handleClick} />
+        <FooterButton icon='medium' onClick={this.handleClick} />
+        <FooterButton icon='user-secret' onClick={this.handleClick} />
       </div>
     );
   }
