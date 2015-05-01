@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 const OrderAction = require('../actions/OrderAction');
 import SimpleStore from '../stores/SimpleStore';
-import MealButton from './MealButton.jsx';
+import MealButton from './MealButton.react';
 
 let getState = () => {
   return {

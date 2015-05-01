@@ -1,5 +1,5 @@
 const React = require('react');
-const Main = React.createFactory(require('./views/Main.jsx'));
+const Main = React.createFactory(require('./views/Main.react'));
 const action = require('./actions/AppActionCreator');
 require('../less/normalize.less');
 require('font-awesome/less/font-awesome.less');

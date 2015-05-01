@@ -1,10 +1,10 @@
 const React = require('react');
 const action = require('../actions/AppActionCreator');
 const store = require('../stores/SimpleStore');
-const Header = require('./Header.jsx');
-const Cashier = require('./Cashier.jsx');
-const MealButtons = require('./MealButtons.jsx');
-const Footer = require('./Footer');
+const Header = require('./Header.react');
+const Cashier = require('./Cashier.react');
+const MealButtons = require('./MealButtons.react');
+const Footer = require('./Footer.react');
 
 function getState() {
   return store.getState();
