@@ -1,35 +1,3 @@
-@import './cashier.less';
-@import './footer.less';
-
-@cashier-bg-color: #273135;
-@cashier-font-color: #89949B;
-@right-side-bg-color: #E9F0F5;
-
-
-html, body, #react, .main {
-  height: 100%;
-}
-
-.main {
-  display: flex;
-  flex-flow: row wrap;
-}
-
-.right-side {
-  background: @right-side-bg-color;
-  flex: 5;
-  display: flex;
-  flex-flow: column;
-
-  .meal-button-container {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-around;
-    flex: 5;
-  }
-
-  .meal-button {
-    flex: 0 1 90%/6;
-    margin-top: 10px;
-  }
-}
+/* material-ui */
+@import "../../../node_modules/material-ui/src/less/scaffolding.less";
+@import "../../../node_modules/material-ui/src/less/components.less";

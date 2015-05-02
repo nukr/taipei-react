@@ -1,48 +1,62 @@
-const React = require('react');
-const action = require('../actions/AppActionCreator');
-const store = require('../stores/SimpleStore');
-const Header = require('./Header.react');
-const Cashier = require('./Cashier.react');
-const MealButtons = require('./MealButtons.react');
-const Footer = require('./Footer.react');
+import React, {Component} from 'react';
+import action from '../actions/ViewActionCreator';
+import AppStore from '../stores/AppStore';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import {RouteHandler} from 'react-router';
+import {AppBar, AppCanvas, Menu, IconButton} from 'material-ui';
 
-function getState() {
-  return store.getState();
-}
+import AppLeftNav from './LeftNav.react';
 
-let Main = React.createClass({
-  getInitialState(){
-    return getState();
-  },
+injectTapEventPlugin();
 
-  componentDidMount(){
-    store.addChangeListener(this.change);
-  },
+let getState = () => {
+  return {
+    AppStore: AppStore.getState()
+  };
+};
 
-  componentWillUnmount(){
-    store.removeChangeListener(this.change);
-  },
-
-  handleClick(meal) {
-    action.addOrder(meal);
-  },
-
-  change() {
-    this.setState(getState());
-  },
-
-  render() {
-    return(
-      <div className="main">
-        <Cashier />
-        <div className="right-side">
-          <MealButtons />
-          <Footer />
-        </div>
-      </div>
-    );
+class Main extends Component {
+  constructor () {
+    super();
+    this.state = getState();
+    this.change = () => this.setState(getState());
+    this._onLeftIconButtonTouchTap = this._onLeftIconButtonTouchTap.bind(this);
   }
 
-})
+  componentDidMount () {
+    AppStore.addChangeListener(this.change);
+  }
 
-module.exports = Main;
+  componentWillUnmount () {
+    AppStore.removeChangeListener(this.change);
+  }
+
+  _onLeftIconButtonTouchTap () {
+    this.refs.leftNav.toggle();
+  }
+
+  render () {
+    let githubButton = (
+      <IconButton
+        iconStyle={{color: '#FFF', fill: '#FFF'}}
+        iconClassName="fa fa-github"
+        href="https://github.com/callemall/material-ui"
+        linkButton={true} />
+    );
+    return (
+      <AppCanvas predefinedLayout={1}>
+        <AppBar
+          className="mui-dark-theme"
+          onMenuIconButtonTouchTap={this._onLeftIconButtonTouchTap}
+          title="Test"
+          zDepth={0}
+          iconElementRight={githubButton}/>
+        <AppLeftNav ref="leftNav" />
+        <RouteHandler />
+      </AppCanvas>
+    );
+  }
+}
+
+export default Main;
+

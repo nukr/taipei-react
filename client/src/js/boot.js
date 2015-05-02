@@ -1,9 +1,10 @@
-const React = require('react');
-const Main = React.createFactory(require('./views/Main.react'));
-const action = require('./actions/AppActionCreator');
-require('../less/normalize.less');
-require('font-awesome/less/font-awesome.less');
-require('../less/style.less');
-action.init();
+import React from 'react';
+import '../less/normalize.less';
+import 'font-awesome/less/font-awesome.less';
+import '../less/style.less';
+import routes from './routes';
+import Router from 'react-router';
 
-React.render(Main(), document.getElementById('react'));
+Router.run(routes, (Handler) => {
+  React.render(<Handler/>, document.body);
+});

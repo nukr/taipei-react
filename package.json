@@ -15,16 +15,19 @@
   "license": "MIT",
   "dependencies": {
     "co": "^4.5.2",
+    "eventemitter2": "^0.4.14",
     "flux": "^2.0.3",
+    "font-awesome": "^4.3.0",
+    "material-ui": "^0.7.5",
     "react": "^0.13.2",
-    "superagent": "^1.2.0",
-    "webpack": "^1.8.10"
+    "react-router": "^0.13.3",
+    "react-tap-event-plugin": "^0.1.6",
+    "superagent": "^1.2.0"
   },
   "devDependencies": {
-    "babel": "^5.1.13",
-    "babel-core": "^5.1.13",
+    "babel-core": "^5.2.6",
     "babel-loader": "^5.0.0",
-    "babel-runtime": "^5.1.13",
+    "babel-runtime": "^5.2.6",
     "browser-sync": "^2.6.5",
     "css-loader": "^0.12.0",
     "file-loader": "^0.8.1",
@@ -38,7 +41,6 @@
     "require-dir": "^0.3.0",
     "style-loader": "^0.12.1",
     "url-loader": "^0.5.5",
-    "webpack": "^1.8.10",
-    "webpack-dev-server": "^1.8.2"
+    "webpack": "^1.8.11"
   }
 }
