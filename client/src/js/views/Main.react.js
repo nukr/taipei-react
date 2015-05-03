@@ -9,26 +9,10 @@ import AppLeftNav from './LeftNav.react';
 
 injectTapEventPlugin();
 
-let getState = () => {
-  return {
-    AppStore: AppStore.getState()
-  };
-};
-
 class Main extends Component {
   constructor () {
     super();
-    this.state = getState();
-    this.change = () => this.setState(getState());
     this._onLeftIconButtonTouchTap = this._onLeftIconButtonTouchTap.bind(this);
-  }
-
-  componentDidMount () {
-    AppStore.addChangeListener(this.change);
-  }
-
-  componentWillUnmount () {
-    AppStore.removeChangeListener(this.change);
   }
 
   _onLeftIconButtonTouchTap () {

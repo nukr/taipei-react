@@ -6,6 +6,6 @@ gulp.task('browserSync', function () {
     server: {
       baseDir: './client/build'
     },
-    open: 'external'
+    open: 'local'
   });
 });

@@ -3,7 +3,7 @@ import Router from 'react-router';
 import {MenuItem, LeftNav} from 'material-ui';
 
 let menuItems = [
-    { route: 'la-carte', text: '點餐' },
+    { route: 'carte', text: '點餐' },
     { route: 'customization', text: 'Customization' },
     { route: 'components', text: 'Components' },
     { type: MenuItem.Types.SUBHEADER, text: 'Resources' },

@@ -4,8 +4,32 @@ import EventEmitter from 'eventemitter2';
 import ApiUtils from '../utils';
 
 let State = {};
-State.meals = [];
-State.loading = null;
+State.meals = {};
+State.lacartes = [];
+State.loading = false;
+
+let classifyMealsByCategory = (mealsOfArray) => {
+  mealsOfArray.forEach(meal => {
+    if (typeof State.meals[meal.category] === 'undefined') {
+      State.meals[meal.category] = [];
+    }
+    State.meals[meal.category].push(meal);
+  });
+};
+
+let lacarte = (meal) => {
+  // before push we need know this meal's position in array(State.meals)
+  let isNew = true;
+  State.lacartes.forEach(l => {
+    if (l.meal.id === meal.id) {
+      isNew = false;
+      l.qty += 1;
+    }
+  });
+  if (isNew) {
+    State.lacartes.push({meal: meal, qty: 1});
+  }
+};
 
 /**
  * @description
@@ -19,7 +43,7 @@ State.loading = null;
 
 class Store extends EventEmitter {
   getState () {
-    if (State.meals.length === 0) {
+    if (Object.keys(State.meals).length === 0) {
       ApiUtils.getData();
       State.loading = true;
       return State;
@@ -54,15 +78,11 @@ store.dispatchToken = AppDispatcher.register(function eventHandlers (evt) {
   switch (action.actionType) {
 
     case AppConstants.GET_DATA:
-      if (evt.source === AppConstants.SOURCE_VIEW_ACTION) {
-        // Do View Action
-      }
-
-      if (evt.source === AppConstants.SOURCE_SERVER_ACTION) {
-        // Do Server Action
-        State.meals = action.data;
-      }
-
+      classifyMealsByCategory(action.data);
+      store.emit(AppConstants.CHANGE_EVENT);
+      break;
+    case AppConstants.LACARTE:
+      lacarte(action.meal);
       store.emit(AppConstants.CHANGE_EVENT);
       break;
     default:
