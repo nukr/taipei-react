@@ -6,6 +6,7 @@ import ApiUtils from '../utils';
 let State = {};
 State.meals = {};
 State.lacartes = [];
+State.lacarteTotalPrice = 0;
 State.loading = false;
 
 let classifyMealsByCategory = (mealsOfArray) => {
@@ -20,14 +21,18 @@ let classifyMealsByCategory = (mealsOfArray) => {
 let lacarte = (meal) => {
   // before push we need know this meal's position in array(State.meals)
   let isNew = true;
+  State.lacarteTotalPrice = 0; //Reset total price
   State.lacartes.forEach(l => {
     if (l.meal.id === meal.id) {
       isNew = false;
       l.qty += 1;
+      l.total = l.meal.price * l.qty;
     }
+    State.lacarteTotalPrice += l.meal.price * l.qty;
   });
   if (isNew) {
-    State.lacartes.push({meal: meal, qty: 1});
+    State.lacartes.push({meal: meal, qty: 1, total: meal.price});
+    State.lacarteTotalPrice += meal.price;
   }
 };
 
