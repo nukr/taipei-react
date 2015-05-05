@@ -4,7 +4,7 @@ import {MenuItem, LeftNav} from 'material-ui';
 
 let menuItems = [
     { route: 'carte', text: '點餐' },
-    { route: 'customization', text: 'Customization' },
+    { route: 'meal list', text: '菜單管理' },
     { route: 'components', text: 'Components' },
     { type: MenuItem.Types.SUBHEADER, text: 'Resources' },
     { type: MenuItem.Types.LINK, payload: 'https://github.com/callemall/material-ui', text: 'GitHub' },
