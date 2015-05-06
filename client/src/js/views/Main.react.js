@@ -23,7 +23,7 @@ class Main extends Component {
     let githubButton = (
       <IconButton
         iconStyle={{color: '#FFF', fill: '#FFF'}}
-        iconClassName="fa fa-github"
+        iconClassName="fa fa-gear"
         href="https://github.com/callemall/material-ui"
         linkButton={true} />
     );
