@@ -34,12 +34,12 @@ class Carte extends Component {
 
   renderTabs () {
     let categoryOrder = [
-      'normal',
-      'newYear',
-      'single',
-      'sevenFive',
-      'event',
-      'christmas'
+      '一般',
+      '新年',
+      '單點',
+      '七五折',
+      '活動',
+      '聖誕節'
     ];
     let renderBlocks = (key) => {
       if (Object.keys(this.state.meals).length !== 0) {

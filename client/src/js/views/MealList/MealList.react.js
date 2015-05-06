@@ -16,17 +16,17 @@ class MealList extends Component {
     this.renderMealList = (meals) => {
       let mealKeys = Object.keys(meals);
       let renderItems = (meals) => {
-        return meals.map(meal => {
+        return meals.map((meal) => {
           return (
-            <div>{meal.name}</div>
+            <div key={meal.id} style={{fontSize: '16px'}}>{meal.name}</div>
           );
         });
       };
-      return mealKeys.map(key => {
+      return mealKeys.map((key, index) => {
         return (
-          <div>
-            <div>{key}</div>
-            <div>{renderItems(meals[key])}</div>
+          <div key={`MealList-${index}`}style={{marginRight: '20px'}}>
+            <h3>{key}</h3>
+            <div style={{marginLeft: '20px'}}>{renderItems(meals[key])}</div>
           </div>
         );
       });
@@ -44,7 +44,11 @@ class MealList extends Component {
   render () {
     let meals = this.state.meals;
     return (
-      <div style={{paddingTop: '60px'}}>
+      <div style={{
+        paddingTop: '60px',
+        display: 'flex',
+        flexFlow: 'row wrap',
+        justifyContent: 'space-around'}}>
         {this.renderMealList(meals)}
       </div>
     );
