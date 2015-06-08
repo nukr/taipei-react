@@ -3,11 +3,10 @@ import action from '../actions/ServerActionCreator';
 
 export default {
   getData () {
-    superagent
-      .get('http://localhost:12345/meals')
-      .end((err, res) => {
-        if (err) throw new Error();
-        action.getData(res.body.body);
-      });
+    fetch('http://localhost:12345/meals').then((response) => {
+      return response.json()
+    }).then((json) => {
+      action.getData(json)
+    })
   }
 }
