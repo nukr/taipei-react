@@ -1,7 +1,7 @@
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import AppConstants from '../constants/AppConstants';
 import EventEmitter from 'eventemitter2';
-import ApiUtils from '../utils';
+import WebApiUtils from '../utils';
 
 let State = {};
 State.meals = {};
@@ -49,12 +49,26 @@ let lacarte = (meal) => {
 class Store extends EventEmitter {
   getState () {
     if (Object.keys(State.meals).length === 0) {
-      ApiUtils.getData();
+      WebApiUtils.getData();
       State.loading = true;
       return State;
     } else {
       State.loading = false;
       return State;
+    }
+  }
+
+  getStatistics () {
+    if (State.statistics) {
+      return {
+        loading: false,
+        statistics: State.statistics
+      }
+    } else {
+      WebApiUtils.getStatistics()
+      return {
+        loading: true
+      }
     }
   }
 
@@ -84,6 +98,10 @@ store.dispatchToken = AppDispatcher.register(function eventHandlers (evt) {
 
     case AppConstants.GET_DATA:
       classifyMealsByCategory(action.data);
+      store.emit(AppConstants.CHANGE_EVENT);
+      break;
+    case AppConstants.GET_STATISTICS:
+      State.statistics = action.data
       store.emit(AppConstants.CHANGE_EVENT);
       break;
     case AppConstants.LACARTE:

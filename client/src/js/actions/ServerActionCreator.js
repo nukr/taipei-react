@@ -6,6 +6,12 @@ let ServerActionCreator = {
       actionType: AppConstants.GET_DATA,
       data: data
     });
+  },
+  getStatistics (data) {
+    AppDispatcher.handleServerAction({
+      actionType: AppConstants.GET_STATISTICS,
+      data: data
+    });
   }
 };
 export default ServerActionCreator;
