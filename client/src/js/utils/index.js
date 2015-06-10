@@ -1,4 +1,3 @@
-import superagent from 'superagent';
 import action from '../actions/ServerActionCreator';
 
 let sleep = (t) => {

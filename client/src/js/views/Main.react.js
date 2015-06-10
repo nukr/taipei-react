@@ -1,21 +1,35 @@
 import React, {Component} from 'react';
+import mui, {AppBar, AppCanvas, Menu, IconButton} from 'material-ui';
 import action from '../actions/ViewActionCreator';
 import AppStore from '../stores/AppStore';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import {RouteHandler} from 'react-router';
-import {AppBar, AppCanvas, Menu, IconButton} from 'material-ui';
-
 import AppLeftNav from './LeftNav.react';
+
+let ThemeManager = new mui.Styles.ThemeManager()
+let Colors = mui.Styles.Colors
 
 injectTapEventPlugin();
 
 class Main extends Component {
   constructor () {
     super();
-    this._onLeftIconButtonTouchTap = this._onLeftIconButtonTouchTap.bind(this);
+    this.toggleLeftNav = ::this.toggleLeftNav
   }
 
-  _onLeftIconButtonTouchTap () {
+  getChildContext () {
+    return {
+      muiTheme: ThemeManager.getCurrentTheme()
+    }
+  }
+
+  componentWillMount () {
+    ThemeManager.setPalette({
+      accent1Color: Colors.deepOrange500
+    })
+  }
+
+  toggleLeftNav () {
     this.refs.leftNav.toggle();
   }
 
@@ -31,7 +45,7 @@ class Main extends Component {
       <AppCanvas predefinedLayout={1}>
         <AppBar
           className="mui-dark-theme"
-          onMenuIconButtonTouchTap={this._onLeftIconButtonTouchTap}
+          onLeftIconButtonTouchTap={this.toggleLeftNav}
           title="Test"
           zDepth={0}
           iconElementRight={githubButton}/>
@@ -42,5 +56,8 @@ class Main extends Component {
   }
 }
 
+Main.childContextTypes = {
+  muiTheme: React.PropTypes.object
+}
 export default Main;
 

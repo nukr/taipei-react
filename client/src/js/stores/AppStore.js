@@ -67,7 +67,8 @@ class Store extends EventEmitter {
     } else {
       WebApiUtils.getStatistics()
       return {
-        loading: true
+        loading: true,
+        statistics: []
       }
     }
   }

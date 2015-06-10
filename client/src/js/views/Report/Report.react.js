@@ -22,6 +22,7 @@ class Report extends Component {
   }
 
   render () {
+    console.log(this.state)
     let faSpin = cx({
       'fa': true,
       'fa-refresh': true,
@@ -30,6 +31,13 @@ class Report extends Component {
     return (
       <div style={{paddingTop: '60px'}}>
         <i className={faSpin}></i>
+        {
+          this.state.statistics.map(stat => {
+            return (
+              <div>{stat.billNo}</div>
+            )
+          })
+        }
       </div>
     );
   }
