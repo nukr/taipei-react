@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {DatePicker, FlatButton} from 'material-ui'
 import AppStore from '../../stores/AppStore';
 import FixedDataTable, {Table, Column} from 'fixed-data-table'
 import cx from 'classnames'
@@ -22,6 +23,7 @@ class Report extends Component {
     this.change = () => this.setState(getState())
     this.rowGetter = ::this.rowGetter
     this.resizeEnd = ::this.resizeEnd
+    this.send = ::this.send
   }
 
   componentDidMount () {
@@ -43,6 +45,11 @@ class Report extends Component {
     })
   }
 
+  send () {
+    let d = this.refs.d.getDate()
+    console.log(d)
+  }
+
   render () {
     console.log(this.state)
     let faSpin = cx({
@@ -52,6 +59,10 @@ class Report extends Component {
     })
     return (
       <div style={{paddingTop: '100px', display: 'flex', justifyContent: 'center'}}>
+        <DatePicker
+          hintText="Portrait Dialog"
+          ref="d"/>
+        <FlatButton label="Send" onClick={this.send}/>
         <Table
           rowHeight={50}
           rowGetter={this.rowGetter}
