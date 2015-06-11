@@ -10,14 +10,18 @@ let getState = () => {
   return statistics
 }
 
+let isColumnResizing;
+
 class Report extends Component {
   constructor () {
     super();
     this.state = getState()
-    this.state.tableWidth = window.innerWidth
-    this.state.tableHeight = window.innerHeight - 60
+    this.state.tableWidth = window.innerWidth - 50
+    this.state.tableHeight = window.innerHeight - 100
+    this.state.columnWidth = 100
     this.change = () => this.setState(getState())
     this.rowGetter = ::this.rowGetter
+    this.resizeEnd = ::this.resizeEnd
   }
 
   componentDidMount () {
@@ -32,6 +36,13 @@ class Report extends Component {
     return this.state.statistics[rowIndex]
   }
 
+  resizeEnd (e) {
+    isColumnResizing = false
+    this.setState({
+      columnWidth: e
+    })
+  }
+
   render () {
     console.log(this.state)
     let faSpin = cx({
@@ -40,21 +51,24 @@ class Report extends Component {
       'fa-spin': this.state.loading
     })
     return (
-      <div style={{paddingTop: '60px'}}>
+      <div style={{paddingTop: '100px', display: 'flex', justifyContent: 'center'}}>
         <Table
           rowHeight={50}
           rowGetter={this.rowGetter}
           rowsCount={this.state.statistics.length}
           width={this.state.tableWidth}
           height={this.state.tableHeight}
-          headerHeight={50}>
+          headerHeight={50}
+          onColumnResizeEndCallback={this.resizeEnd}
+          isColumnResizing={isColumnResizing}>
           <Column
             label="訂單編號"
-            width={100}
-            dataKey="billNo"/>
+            width={this.state.columnWidth}
+            dataKey="billNo"
+            isResizable={true}/>
           <Column
             label="建立者"
-            width={200}
+            width={100}
             dataKey="creator"/>
         </Table>
       </div>
