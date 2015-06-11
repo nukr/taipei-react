@@ -6,6 +6,13 @@ let ViewActionCreator = {
       actionType: AppConstants.LACARTE,
       meal: meal
     });
+  },
+
+  fetchBills (ISOString) {
+    AppDispatcher.handleViewAction({
+      actionType: AppConstants.FETCH_BILLS,
+      date: ISOString
+    })
   }
 };
 export default ViewActionCreator;

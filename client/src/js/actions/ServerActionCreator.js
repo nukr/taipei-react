@@ -12,6 +12,12 @@ let ServerActionCreator = {
       actionType: AppConstants.GET_STATISTICS,
       data: data
     });
+  },
+  fetchBills (data) {
+    AppDispatcher.handleServerAction({
+      actionType: AppConstants.FETCH_BILLS,
+      data: data
+    });
   }
 };
 export default ServerActionCreator;

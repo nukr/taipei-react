@@ -2,13 +2,14 @@ import React, {Component} from 'react';
 import {DatePicker, FlatButton} from 'material-ui'
 import AppStore from '../../stores/AppStore';
 import FixedDataTable, {Table, Column} from 'fixed-data-table'
+import ViewAction from '../../actions/ViewActionCreator'
 import cx from 'classnames'
 
 import 'fixed-data-table/dist/fixed-data-table.css'
 
 let getState = () => {
-  let statistics = AppStore.getStatistics()
-  return statistics
+  let bills = AppStore.bills
+  return bills
 }
 
 let isColumnResizing;
@@ -35,7 +36,7 @@ class Report extends Component {
   }
 
   rowGetter (rowIndex) {
-    return this.state.statistics[rowIndex]
+    return this.state.bills[rowIndex]
   }
 
   resizeEnd (e) {
@@ -47,7 +48,7 @@ class Report extends Component {
 
   send () {
     let d = this.refs.d.getDate()
-    console.log(d)
+    ViewAction.fetchBills(d.toISOString())
   }
 
   render () {
@@ -66,7 +67,7 @@ class Report extends Component {
         <Table
           rowHeight={50}
           rowGetter={this.rowGetter}
-          rowsCount={this.state.statistics.length}
+          rowsCount={this.state.bills.length}
           width={this.state.tableWidth}
           height={this.state.tableHeight}
           headerHeight={50}

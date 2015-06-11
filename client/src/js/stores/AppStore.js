@@ -58,17 +58,17 @@ class Store extends EventEmitter {
     }
   }
 
-  getStatistics () {
-    if (State.statistics) {
+  get bills () {
+    if (State.bills) {
       return {
         loading: false,
-        statistics: State.statistics
+        bills: State.bills
       }
     } else {
-      WebApiUtils.getStatistics()
+      WebApiUtils.fetchBills()
       return {
         loading: true,
-        statistics: []
+        bills: []
       }
     }
   }
@@ -107,6 +107,14 @@ store.dispatchToken = AppDispatcher.register(function eventHandlers (evt) {
       break;
     case AppConstants.LACARTE:
       lacarte(action.meal);
+      store.emit(AppConstants.CHANGE_EVENT);
+      break;
+    case AppConstants.FETCH_BILLS:
+      if (evt.source === AppConstants.SOURCE_VIEW_ACTION) {
+        WebApiUtils.fetchBills(action.date)
+      } else {
+        State.bills = action.data
+      }
       store.emit(AppConstants.CHANGE_EVENT);
       break;
     default:
