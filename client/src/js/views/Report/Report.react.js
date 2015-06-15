@@ -18,13 +18,14 @@ class Report extends Component {
   constructor () {
     super();
     this.state = getState()
-    this.state.tableWidth = window.innerWidth - 50
+    this.state.tableWidth = window.innerWidth - 350
     this.state.tableHeight = window.innerHeight - 100
     this.state.columnWidth = 100
     this.change = () => this.setState(getState())
     this.rowGetter = ::this.rowGetter
     this.resizeEnd = ::this.resizeEnd
     this.send = ::this.send
+    this.dishesRenderer = ::this.dishesRenderer
   }
 
   componentDidMount () {
@@ -51,6 +52,14 @@ class Report extends Component {
     ViewAction.fetchBills(d.toISOString())
   }
 
+  dishesRenderer (cell) {
+    return (
+      <ul>
+        {cell.map((c, index) => <li key={`dish-${index}`}>{c.name}</li>)}
+      </ul>
+    )
+  }
+
   render () {
     console.log(this.state)
     let faSpin = cx({
@@ -60,29 +69,50 @@ class Report extends Component {
     })
     return (
       <div style={{paddingTop: '100px', display: 'flex', justifyContent: 'center'}}>
-        <DatePicker
-          hintText="Portrait Dialog"
-          ref="d"/>
-        <FlatButton label="Send" onClick={this.send}/>
-        <Table
-          rowHeight={50}
-          rowGetter={this.rowGetter}
-          rowsCount={this.state.bills.length}
-          width={this.state.tableWidth}
-          height={this.state.tableHeight}
-          headerHeight={50}
-          onColumnResizeEndCallback={this.resizeEnd}
-          isColumnResizing={isColumnResizing}>
-          <Column
-            label="訂單編號"
-            width={this.state.columnWidth}
-            dataKey="billNo"
-            isResizable={true}/>
-          <Column
-            label="建立者"
-            width={100}
-            dataKey="creator"/>
-        </Table>
+        <div style={{width: 300}}>
+          <DatePicker
+            hintText="Portrait Dialog"
+            ref="d"/>
+          <FlatButton label="Send" onClick={this.send}/>
+        </div>
+        <div>
+          <Table
+            rowHeight={50}
+            rowGetter={this.rowGetter}
+            rowsCount={this.state.bills.length}
+            width={this.state.tableWidth}
+            height={this.state.tableHeight}
+            headerHeight={50}
+            onColumnResizeEndCallback={this.resizeEnd}
+            isColumnResizing={isColumnResizing}>
+            <Column
+              label="訂單編號"
+              width={this.state.columnWidth}
+              dataKey="billNo"
+              isResizable={true}/>
+            <Column
+              label="建立者"
+              width={100}
+              dataKey="creator"/>
+            <Column
+              label="刷卡"
+              width={100}
+              dataKey="credit"/>
+            <Column
+              label="折扣"
+              width={100}
+              dataKey="discount"/>
+            <Column
+              label="班別"
+              width={100}
+              dataKey="shift"/>
+            <Column
+              label="餐點"
+              width={100}
+              dataKey="dishes"
+              cellRenderer={this.dishesRenderer}/>
+          </Table>
+        </div>
       </div>
     );
   }

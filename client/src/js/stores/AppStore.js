@@ -2,6 +2,7 @@ import AppDispatcher from '../dispatcher/AppDispatcher';
 import AppConstants from '../constants/AppConstants';
 import EventEmitter from 'eventemitter2';
 import WebApiUtils from '../utils';
+import moment from 'moment'
 
 let State = {};
 State.meals = {};
@@ -65,7 +66,8 @@ class Store extends EventEmitter {
         bills: State.bills
       }
     } else {
-      WebApiUtils.fetchBills()
+      let d = moment().hours(0).minute(0).second(0).millisecond(0).toISOString()
+      WebApiUtils.fetchBills(d)
       return {
         loading: true,
         bills: []
